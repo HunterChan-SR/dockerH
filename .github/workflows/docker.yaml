@@ -1,7 +1,6 @@
 name: Docker
 
-on:push
-
+on: push
 jobs:
   pull:
     name:拉取镜像
