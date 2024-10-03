@@ -13,7 +13,7 @@ jobs:
         id: get_workspace
         run: echo "WORKSPACE=$(pwd)" >> $GITHUB_ENV
       - name: 执行拉取命令
-        run: docker pull dreamacro/clash
+        run: docker pull xhofe/alist
       - name: 把镜像保存为压缩包
         run: docker save -o ${WORKSPACE}/clash.tar dreamacro/clash
       - name: 上传clash.tar作为工件
