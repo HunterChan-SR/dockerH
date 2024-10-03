@@ -27,9 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码库
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       - name: 下载clash.tar工件
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: clash-image
       - name: 显示下载的文件
