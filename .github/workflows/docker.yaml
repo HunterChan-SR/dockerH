@@ -7,6 +7,8 @@ jobs:
     name: 拉取并保存镜像
     runs-on: ubuntu-latest
     steps:
+      - name: 通过pwd获取当前文件夹
+        run: WokrSpace=$(pwd)
       - name: 检出代码库
         uses: actions/checkout@v2
       - name: 执行拉取命令
@@ -14,9 +16,9 @@ jobs:
       - name: 查看镜像信息
         run: docker images
       - name: 把镜像保存为压缩包
-        run: docker save dreamacro/clash > clash.tar
+        run: docker save dreamacro/clash >  WorkSpace/clash.tar
       - name: 放到分支里
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: ph-pages
-          folder: pack
+          folder: WorkSpace
