@@ -1,0 +1,11 @@
+name: Docker
+
+on:push
+
+jobs:
+  pull:
+    name:拉取镜像
+    runs-on: ubuntu-latest
+    steps:
+      - name: 执行拉取命令
+      run: pwd
