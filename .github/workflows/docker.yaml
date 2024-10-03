@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 执行拉取命令
-      run: pwd
+        run: pwd
