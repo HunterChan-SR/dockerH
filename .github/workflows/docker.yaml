@@ -7,18 +7,19 @@ jobs:
     name: 拉取并保存镜像
     runs-on: ubuntu-latest
     steps:
-      - name: 通过pwd获取当前文件夹
-        run: WokrSpace=$(pwd)
       - name: 检出代码库
         uses: actions/checkout@v2
+      - name: 获取当前工作目录
+        id: get_workspace
+        run: echo "WORKSPACE=$(pwd)" >> $GITHUB_ENV
       - name: 执行拉取命令
         run: docker pull dreamacro/clash
       - name: 查看镜像信息
         run: docker images
       - name: 把镜像保存为压缩包
-        run: docker save dreamacro/clash >  WorkSpace/clash.tar
+        run: docker save -o ${WORKSPACE}/clash.tar dreamacro/clash
       - name: 放到分支里
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: ph-pages
-          folder: WorkSpace
+          branch: gh-pages  # 注意这里的分支名称应该是`gh-pages`而非`ph-pages`
+          folder: .  # 如果你想部署整个仓库的内容，可以设置为`.`，否则指定具体文件夹
