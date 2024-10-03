@@ -7,9 +7,24 @@ jobs:
     name: 拉取并保存镜像
     runs-on: ubuntu-latest
     steps:
+      - name: 检出代码库
+        uses: actions/checkout@v2
       - name: 执行拉取命令
         run: docker pull dreamacro/clash
       - name: 查看镜像信息
         run: docker images
       - name: 把镜像保存为压缩包
         run: docker save dreamacro/clash > clash.tar
+      - name: 创建新的分支
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git checkout -b new-branch
+      - name: 添加并提交文件
+        run: |
+          git add clash.tar
+          git commit -m "Add clash.tar to new branch"
+      - name: 推送到新的分支
+        uses: ad-m/github-push-action@master
+        with:
+          branch: new-branch
