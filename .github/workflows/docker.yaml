@@ -18,9 +18,11 @@ jobs:
         run: docker images
       - name: 把镜像保存为压缩包
         run: docker save -o ${WORKSPACE}/clash.tar dreamacro/clash
-      - name: 放到分支里
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages  # 注意这里的分支名称应该是`gh-pages`而非`ph-pages`
-          folder: .  # 部署整个仓库的内容
-          clean: true  # 清理旧文件
+      - name: ls
+        run: ls -la
+      # - name: 放到分支里
+      #   uses: JamesIves/github-pages-deploy-action@v4
+      #   with:
+      #     branch: gh-pages  # 注意这里的分支名称应该是`gh-pages`而非`ph-pages`
+      #     folder: .  # 部署整个仓库的内容
+      #     clean: true  # 清理旧文件
