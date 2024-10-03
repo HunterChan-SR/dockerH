@@ -3,8 +3,8 @@ name: Docker
 on: push
 
 jobs:
-  pull:
-    name: 拉取并保存镜像
+  build_and_upload:
+    name: 构建并上传镜像
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码库
@@ -14,15 +14,23 @@ jobs:
         run: echo "WORKSPACE=$(pwd)" >> $GITHUB_ENV
       - name: 执行拉取命令
         run: docker pull dreamacro/clash
-      - name: 查看镜像信息
-        run: docker images
       - name: 把镜像保存为压缩包
         run: docker save -o ${WORKSPACE}/clash.tar dreamacro/clash
-      - name: ls
+      - name: 上传clash.tar作为工件
+        uses: actions/upload-artifact@v2
+        with:
+          name: clash-image
+          path: ${{ env.WORKSPACE }}/clash.tar
+  download_and_use:
+    name: 下载并使用镜像
+    needs: build_and_upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码库
+        uses: actions/checkout@v2
+      - name: 下载clash.tar工件
+        uses: actions/download-artifact@v2
+        with:
+          name: clash-image
+      - name: 显示下载的文件
         run: ls -la
-      # - name: 放到分支里
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     branch: gh-pages  # 注意这里的分支名称应该是`gh-pages`而非`ph-pages`
-      #     folder: .  # 部署整个仓库的内容
-      #     clean: true  # 清理旧文件
