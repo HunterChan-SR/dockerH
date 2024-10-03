@@ -16,7 +16,7 @@ jobs:
       - name: 把镜像保存为压缩包
         run: docker save dreamacro/clash > clash.tar
       - name: 放到分支里
-        uses: JamesIves/upload-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: ph-pages
           folder: pack
