@@ -9,6 +9,5 @@ jobs:
     steps:
       - name: 执行拉取命令
         run: docker pull dreamacro/clash
-    steps:
       - name: 查看镜像信息
         run: docker images
