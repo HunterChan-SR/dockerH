@@ -15,16 +15,8 @@ jobs:
         run: docker images
       - name: 把镜像保存为压缩包
         run: docker save dreamacro/clash > clash.tar
-      - name: 创建新的分支
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git checkout -b new-branch
-      - name: 添加并提交文件
-        run: |
-          git add clash.tar
-          git commit -m "Add clash.tar to new branch"
-      - name: 推送到新的分支
-        uses: ad-m/github-push-action@master
+      - name: 放到分支里
+        uses: JamesIves/upload-pages-deploy-action@v4
         with:
-          branch: new-branch
+          branch: ph-pages
+          folder: pack
