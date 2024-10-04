@@ -4,7 +4,7 @@ on: push
 
 env: 
   IMAGE_NAME: "kali-last-release"
-  IMAGE_TAG: "kalilinux/kali-last-release"
+  IMAGE_TAG: "kalilinux/kali-last-release" # 确保IMAGE_TAG指向正确的镜像
 
 jobs:
   build_and_upload:
@@ -17,15 +17,15 @@ jobs:
         id: get_workspace
         run: echo "WORKSPACE=$(pwd)" >> $GITHUB_ENV
       - name: 执行拉取命令
-        run: docker pull ${IMAGE_TAG}
+        run: docker pull ${{ env.IMAGE_TAG }}
       - name: 把镜像保存为压缩包
-        run: docker save -o ${WORKSPACE}/${IMAGE_NAME}.tar ${IMAGE_TAG}
+        run: docker save -o ${{ env.WORKSPACE }}/${{ env.IMAGE_NAME }}.tar ${{ env.IMAGE_TAG }}
       - name: 显示文件夹
         run: ls -la
       - name: 上传${{ env.IMAGE_NAME }}.tar作为工件
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ IMAGE_NAME }}-image
+          name: ${{ env.IMAGE_NAME }}-image
           path: ${{ env.WORKSPACE }}/${{ env.IMAGE_NAME }}.tar
   download_and_use:
     name: 下载并使用镜像
@@ -40,6 +40,3 @@ jobs:
           name: ${{ env.IMAGE_NAME }}-image
       - name: 显示下载的文件
         run: ls -la
-
-        
-        
