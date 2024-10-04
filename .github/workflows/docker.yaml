@@ -3,8 +3,8 @@ name: Docker
 on: push
 
 env: 
-  IMAGE_NAME:  "openvpn-as"
-  IMAGE_TAG: "openvpn/openvpn-as"
+  IMAGE_NAME:  "openvpn"
+  IMAGE_TAG: "kylemanna/openvpn"
 
 jobs:
   build_and_upload:
