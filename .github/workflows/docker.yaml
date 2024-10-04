@@ -3,8 +3,8 @@ name: Docker
 on: push
 
 env: 
-  IMAGE_NAME:  "openvpn"
-  IMAGE_TAG: "kylemanna/openvpn"
+  IMAGE_NAME:  "kali-last-release"
+  IMAGE_TAG: "kalilinux/kali-last-release"
 
 jobs:
   build_and_upload:
@@ -25,7 +25,7 @@ jobs:
       - name: 上传${{ env.IMAGE_NAME }}.tar作为工件
         uses: actions/upload-artifact@v4
         with:
-          name: ${IMAGE_NAME}-image
+          name: ${{ IMAGE_NAME }}-image
           path: ${{ env.WORKSPACE }}/${{ env.IMAGE_NAME }}.tar
   download_and_use:
     name: 下载并使用镜像
@@ -40,3 +40,6 @@ jobs:
           name: ${{ env.IMAGE_NAME }}-image
       - name: 显示下载的文件
         run: ls -la
+
+        
+        
