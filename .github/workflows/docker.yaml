@@ -3,7 +3,7 @@ name: Docker
 on: push
 
 env: 
-  IMAGE_NAME:  "kali-last-release"
+  IMAGE_NAME: "kali-last-release"
   IMAGE_TAG: "kalilinux/kali-last-release"
 
 jobs:
