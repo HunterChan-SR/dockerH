@@ -2,6 +2,10 @@ name: Docker
 
 on: push
 
+env: 
+  IMAGE_NAME:  "openvpn-as"
+  IMAGE_TAG: "openvpn/openvpn-as"
+
 jobs:
   build_and_upload:
     name: 构建并上传镜像
@@ -13,14 +17,14 @@ jobs:
         id: get_workspace
         run: echo "WORKSPACE=$(pwd)" >> $GITHUB_ENV
       - name: 执行拉取命令
-        run: docker pull openvpn/openvpn-as
+        run: docker pull ${IMAGE_TAG}
       - name: 把镜像保存为压缩包
-        run: docker save -o ${WORKSPACE}/openvpn.tar openvpn/openvpn-as
-      - name: 上传openvpn.tar作为工件
+        run: docker save -o ${WORKSPACE}/${IMAGE_NAME}.tar ${IMAGE_TAG}
+      - name: 上传${IMAGE_NAME}.tar作为工件
         uses: actions/upload-artifact@v4
         with:
-          name: openvpn-image
-          path: ${{ env.WORKSPACE }}/openvpn.tar
+          name: ${IMAGE_NAME}-image
+          path: ${{ env.WORKSPACE }}/${IMAGE_NAME}.tar
   download_and_use:
     name: 下载并使用镜像
     needs: build_and_upload
@@ -28,9 +32,9 @@ jobs:
     steps:
       - name: 检出代码库
         uses: actions/checkout@v2
-      - name: 下载openvpn.tar工件
+      - name: 下载${IMAGE_NAME}.tar工件
         uses: actions/download-artifact@v4
         with:
-          name: openvpn-image
+          name: ${IMAGE_NAME}-image
       - name: 显示下载的文件
         run: ls -la
