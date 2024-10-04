@@ -20,6 +20,8 @@ jobs:
         run: docker pull ${IMAGE_TAG}
       - name: 把镜像保存为压缩包
         run: docker save -o ${WORKSPACE}/${IMAGE_NAME}.tar ${IMAGE_TAG}
+      - name: 显示文件夹
+        run: ls -la
       - name: 上传${IMAGE_NAME}.tar作为工件
         uses: actions/upload-artifact@v4
         with:
