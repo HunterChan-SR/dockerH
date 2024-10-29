@@ -3,8 +3,8 @@ name: Docker
 on: push
 
 env: 
-  IMAGE_NAME: "qbittorrent"
-  IMAGE_TAG: "linuxserver/qbittorrent" # 确保IMAGE_TAG指向正确的镜像
+  IMAGE_NAME: "zerotier"
+  IMAGE_TAG: "zerotier/zerotier" # 确保IMAGE_TAG指向正确的镜像
 
 jobs:
   build_and_upload:
