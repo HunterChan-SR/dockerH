@@ -3,8 +3,8 @@ name: Docker
 on: push
 
 env: 
-  IMAGE_NAME: "qbittorrent"
-  IMAGE_TAG: "linuxserver/qbittorrent:amd64-4.4.5-r2-ls226" # 确保IMAGE_TAG指向正确的镜像
+  IMAGE_NAME: "clash"
+  IMAGE_TAG: "dreamacro/clash" # 确保IMAGE_TAG指向正确的镜像
 
 jobs:
   build_and_upload:
